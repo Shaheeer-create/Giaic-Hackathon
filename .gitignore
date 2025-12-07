@@ -73,3 +73,4 @@ tslint.yaml
 .DS_Store
 Thumbs.db
 
+"docs/docs-folder/"  
