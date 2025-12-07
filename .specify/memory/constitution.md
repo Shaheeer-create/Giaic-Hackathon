@@ -1,55 +1,111 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: 1.0.0 → 1.0.0 (initial creation)
+Modified principles: N/A (new document)
+Added sections: All sections (initial creation)
+Removed sections: N/A
+Templates requiring updates: ⚠ pending - .specify/templates/plan-template.md, .specify/templates/spec-template.md, .specify/templates/tasks-template.md
+Follow-up TODOs: RATIFICATION_DATE needs to be finalized
+-->
+# Physical AI & Humanoid Robotics – AI-Native Textbook with RAG Tutor Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Spec-Driven First
+No chapter, feature, or code is written without a clear specification. Constitution → Specification → Plan → Tasks → Implementation is mandatory.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Educational Clarity Over Complexity
+Content must be understandable by a motivated student. Prefer clear explanations, diagrams, and examples over academic jargon.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### AI-Native by Design
+The AI tutor is a core feature, not an add-on. All content must be structured for Retrieval-Augmented Generation (RAG).
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Source-Truth Enforcement
+The chatbot must answer **only from textbook content**. No hallucinations, no external guessing.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Reusability & Intelligence Capture
+Prompts, agent behaviors, and structures must be reusable. Reusable intelligence is an explicit success criterion.
 
-### [PRINCIPLE_6_NAME]
+### Mandatory Technology Stack
+These technologies are **required** and cannot be substituted:
+- Docusaurus for textbook platform
+- Markdown (AI-generated but human-reviewed)
+- GitHub Pages or Vercel for deployment
+- OpenAI Agents SDK / ChatKit SDK for AI
+- FastAPI (backend API service)
+- Neon Serverless PostgreSQL (metadata & auth storage)
+- Qdrant Cloud (vector database for embeddings)
+- Claude Code for AI authoring
+- Spec-Kit Plus (for constitution, specs, plans, tasks)
 
+## Content Structure Rules
+The textbook **must follow the official hackathon syllabus**, including:
+- Physical AI foundations
+- ROS 2
+- Gazebo & simulation
+- NVIDIA Isaac
+- Vision-Language-Action (VLA)
+- Capstone humanoid project
 
-[PRINCIPLE__DESCRIPTION]
+Every chapter must include:
+- Learning objectives
+- Concept explanation
+- Practical examples
+- AI-answerable structure (RAG-friendly)
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Chapters must be modular and independently queryable by the AI tutor.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## RAG Chatbot Rules
+The chatbot must:
+- Answer questions strictly from the book's indexed content
+- Support answering questions from user-selected text
+- Use embeddings stored in Qdrant
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+The chatbot must NOT:
+- Generate answers outside textbook scope
+- Invent robotics facts not present in the book
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+All chatbot behavior must be testable and explainable.
+
+## Personalization & Localization (Bonus Scope)
+If implemented, personalization must:
+- Ask learner background during signup
+- Adapt explanations (beginner / intermediate)
+- Be deterministic and explainable
+
+If translation is implemented:
+- Urdu translation must preserve technical meaning
+- Original English remains the source of truth
+
+## Quality Standards
+### Content
+- No placeholder text
+- No unexplained acronyms
+- Consistent terminology across chapters
+
+### Code
+- Clear folder structure
+- Explicit configuration (no hardcoded secrets)
+- Graceful error handling
+
+### AI Output
+- Prompt logic must be documented
+- Agent behavior must be deterministic when possible
+
+## Definition of Done (Global)
+The project is considered complete only when:
+- ✅ Textbook is published and accessible online
+- ✅ RAG chatbot is embedded and functional
+- ✅ Chatbot answers are sourced from book content
+- ✅ Core syllabus chapters are implemented
+- ✅ GitHub repository is public and structured
+- ✅ Demo video (≤ 90 seconds) is prepared
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution is **binding** for the entire project. Changes to this document require:
+- A version bump
+- Justification
+- Explicit ratification via `/sp.constitution`
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+No implementation may violate this constitution. All PRs/reviews must verify compliance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-01-07 | **Last Amended**: 2025-01-07
