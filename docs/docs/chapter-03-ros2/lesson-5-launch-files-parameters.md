@@ -9,7 +9,7 @@ description: Understanding ROS 2 launch files and parameter management
 
 ## Learning Objectives
 
-- Understand the purpose and structure of ROS 2 launch files
+- Understands the purpose and structure of ROS 2 launch files
 - Create launch files using Python and XML
 - Manage parameters in ROS 2 systems
 - Configure nodes using parameter files
