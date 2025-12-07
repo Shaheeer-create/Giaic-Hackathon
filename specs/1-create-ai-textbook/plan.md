@@ -1,13 +1,13 @@
-# Implementation Plan: AI-Native Textbook using Docusaurus
+# Implementation Plan: [FEATURE]
 
-**Branch**: `1-create-ai-textbook` | **Date**: 2025-01-07 | **Spec**: [specs/1-create-ai-textbook/spec.md]
-**Input**: Feature specification from `/specs/1-create-ai-textbook/spec.md`
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
 **Note**: This template is filled in by the `/sp.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-Writing and publishing a Docusaurus-based AI-native textbook on "Physical AI & Humanoid Robotics" following the official hackathon syllabus, structured for RAG querying with 8 chapters covering topics from introduction to capstone project.
+[Extract from feature spec: primary requirement + technical approach from research]
 
 ## Technical Context
 
@@ -17,37 +17,28 @@ Writing and publishing a Docusaurus-based AI-native textbook on "Physical AI & H
   the iteration process.
 -->
 
-**Language/Version**: Markdown for content, JavaScript/TypeScript for Docusaurus customization
-**Primary Dependencies**: Docusaurus v3+, Node.js, npm/yarn, OpenAI Agents SDK / ChatKit SDK
-**Storage**: GitHub Pages or Vercel for deployment, source content in Git, Qdrant Cloud for vector embeddings
-**Testing**: Manual review process with peer review for content accuracy
-**Target Platform**: Web-based documentation site accessible on multiple devices, with backend API service (FastAPI)
-**Project Type**: Static site generation with documentation focus and backend API for RAG functionality
-**Performance Goals**: All pages load within 3 seconds for 95% of users on standard broadband connections
-**Constraints**: Must meet WCAG 2.1 AA standards for educational materials, content follows syllabus structure
-**Scale/Scope**: 8 chapters with multiple lessons each, targeting 100+ students
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [single/web/mobile - determines source structure]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-The implementation plan adheres to the project constitution:
-
-- ✅ **Spec-Driven First**: Following the constitution's requirement to proceed from Constitution → Specification → Plan → Tasks → Implementation
-- ✅ **Educational Clarity**: Content will be structured with learning objectives, clear explanations, examples, and key takeaways
-- ✅ **AI-Native by Design**: Content will be structured for Retrieval-Augmented Generation (RAG) with clear headings and semantic sections
-- ✅ **Source-Truth Enforcement**: The textbook will be the authoritative source for the RAG chatbot
-- ✅ **Reusability & Intelligence Capture**: The content and structure will be designed for reusability
-- ✅ **Mandatory Technology Stack**: Using Docusaurus as required, with Markdown format, and GitHub Pages/Vercel deployment
-- ✅ **Content Structure**: Following the official hackathon syllabus as required
-- ✅ **Quality Standards**: Content will have no placeholders, consistent terminology, and clear structure
+[Gates determined based on constitution file]
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/1-create-ai-textbook/
+specs/[###-feature]/
 ├── plan.md              # This file (/sp.plan command output)
 ├── research.md          # Phase 0 output (/sp.plan command)
 ├── data-model.md        # Phase 1 output (/sp.plan command)
@@ -57,67 +48,51 @@ specs/1-create-ai-textbook/
 ```
 
 ### Source Code (repository root)
+<!--
+  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+  for this feature. Delete unused options and expand the chosen structure with
+  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  not include Option labels.
+-->
 
 ```text
-docs/
-├── chapter-01-introduction/
-│   ├── lesson-1-what-is-physical-ai.md
-│   ├── lesson-2-embodied-intelligence.md
-│   ├── lesson-3-digital-ai-to-physical.md
-│   └── lesson-4-overview-humanoid-robotics.md
-├── chapter-02-sensors/
-│   ├── lesson-1-robot-sensor-systems.md
-│   ├── lesson-2-cameras-depth-sensors.md
-│   ├── lesson-3-lidar-spatial-mapping.md
-│   ├── lesson-4-imu-balance-sensing.md
-│   └── lesson-5-sensor-fusion-basics.md
-├── chapter-03-ros2/
-│   ├── lesson-1-what-is-ros2.md
-│   ├── lesson-2-nodes-topics-messages.md
-│   ├── lesson-3-services-actions.md
-│   ├── lesson-4-ros2-python.md
-│   ├── lesson-5-launch-files-parameters.md
-│   └── lesson-6-urdf-humanoid-robots.md
-├── chapter-04-simulation/
-│   ├── lesson-1-introduction-gazebo.md
-│   ├── lesson-2-physics-simulation.md
-│   ├── lesson-3-simulating-sensors-gazebo.md
-│   ├── lesson-4-robot-description-formats.md
-│   └── lesson-5-unity-robot-visualization.md
-├── chapter-05-nvidia-isaac/
-│   ├── lesson-1-nvidia-isaac-overview.md
-│   ├── lesson-2-isaac-sim-digital-twins.md
-│   ├── lesson-3-isaac-ros-architecture.md
-│   ├── lesson-4-visual-slam.md
-│   ├── lesson-5-navigation-path-planning.md
-│   └── lesson-6-sim-to-real-transfer.md
-├── chapter-06-humanoid-robots/
-│   ├── lesson-1-humanoid-kinematics-dynamics.md
-│   ├── lesson-2-balance-bipedal-walking.md
-│   ├── lesson-3-manipulation-grasping.md
-│   └── lesson-4-human-robot-interaction-design.md
-├── chapter-07-vla/
-│   ├── lesson-1-what-is-vla.md
-│   ├── lesson-2-voice-to-action-whisper.md
-│   ├── lesson-3-llm-based-task-planning.md
-│   └── lesson-4-multi-modal-robot-interaction.md
-├── chapter-08-capstone/
-│   ├── lesson-1-capstone-architecture-overview.md
-│   ├── lesson-2-voice-command-pipeline.md
-│   ├── lesson-3-navigation-obstacle-avoidance.md
-│   ├── lesson-4-object-detection-interaction.md
-│   └── lesson-5-final-system-walkthrough.md
-├── _category_.json
-└── intro.md
-docusaurus.config.js
-package.json
-sidebars.js
-static/
+# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-└── pages/
+├── models/
+├── services/
+├── cli/
+└── lib/
+
+tests/
+├── contract/
+├── integration/
+└── unit/
+
+# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+backend/
+├── src/
+│   ├── models/
+│   ├── services/
+│   └── api/
+└── tests/
+
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+└── tests/
+
+# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+api/
+└── [same as backend above]
+
+ios/ or android/
+└── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: Docusaurus standard structure with content organized by chapters and lessons, following the official hackathon syllabus structure. The content will be written in Markdown and organized in a hierarchical structure for both human navigation and AI retrieval.
+**Structure Decision**: [Document the selected structure and reference the real
+directories captured above]
 
 ## Complexity Tracking
 
@@ -125,4 +100,5 @@ src/
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| [N/A] | [N/A] | [N/A] |
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

@@ -1,0 +1,204 @@
+# Content Location Validation Contract
+
+**Feature**: Update Documentation Location Constraint
+**Date**: 2025-01-07
+**Version**: 1.0.0
+
+## Overview
+
+This contract defines validation requirements to ensure all textbook content is properly located within the Docusaurus `/docs` directory as required by the documentation location constraint.
+
+## Validation Endpoints
+
+### Check Content Location
+
+**POST** `/validate-content-location`
+
+Validate whether specified content files are located within the `/docs` directory.
+
+#### Request Body
+
+```json
+{
+  "contentPaths": [
+    "docs/chapter-01-introduction/lesson-1-what-is-physical-ai.md",
+    "chapter-02-sensors/lesson-1-robot-sensor-systems.md", 
+    "docs/intro.md"
+  ]
+}
+```
+
+#### Response
+
+```json
+{
+  "validationResults": [
+    {
+      "path": "docs/chapter-01-introduction/lesson-1-what-is-physical-ai.md",
+      "valid": true,
+      "message": "Content properly located under /docs"
+    },
+    {
+      "path": "chapter-02-sensors/lesson-1-robot-sensor-systems.md",
+      "valid": false,
+      "message": "Content not located under /docs directory"
+    },
+    {
+      "path": "docs/intro.md",
+      "valid": true,
+      "message": "Content properly located under /docs"
+    }
+  ],
+  "overallStatus": "partial_failure",
+  "summary": {
+    "total": 3,
+    "valid": 2,
+    "invalid": 1
+  }
+}
+```
+
+### Get Content Structure Compliance
+
+**GET** `/content-structure-compliance`
+
+Get a report on the compliance status of the entire content structure.
+
+#### Query Parameters
+
+- `includeDetails` (boolean, optional): Include detailed path information
+
+#### Response
+
+```json
+{
+  "complianceStatus": "non_compliant",
+  "summary": {
+    "totalContent": 25,
+    "compliantContent": 20,
+    "nonCompliantContent": 5,
+    "compliancePercentage": 80.0
+  },
+  "details": [
+    {
+      "path": "external-content.md",
+      "issue": "Located outside /docs directory",
+      "severity": "critical"
+    }
+  ]
+}
+```
+
+### Validate Navigation Links
+
+**POST** `/validate-navigation-links`
+
+Validate that all navigation links reference content within the `/docs` directory.
+
+#### Request Body
+
+```json
+{
+  "navigationStructure": {
+    "sidebar": [
+      {
+        "type": "doc",
+        "id": "intro"
+      },
+      {
+        "type": "category",
+        "label": "Chapter 1",
+        "items": [
+          {
+            "type": "doc",
+            "id": "chapter-01-introduction/lesson-1-what-is-physical-ai"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### Response
+
+```json
+{
+  "validationResults": [
+    {
+      "id": "intro",
+      "reference": "/docs/intro.md",
+      "valid": true,
+      "message": "Navigation reference properly located under /docs"
+    },
+    {
+      "id": "chapter-01-introduction/lesson-1-what-is-physical-ai",
+      "reference": "/docs/chapter-01-introduction/lesson-1-what-is-physical-ai.md",
+      "valid": true,
+      "message": "Navigation reference properly located under /docs"
+    }
+  ],
+  "overallStatus": "compliant",
+  "summary": {
+    "total": 2,
+    "valid": 2,
+    "invalid": 0
+  }
+}
+```
+
+## Validation Rules
+
+### Content Path Validation
+
+**Rule**: All content paths must start with `/docs/`
+
+**Purpose**: Ensure content is within the Docusaurus-expected directory structure
+
+**Error Conditions**:
+- Path does not begin with `/docs/`
+- Path contains relative navigation (`../`) that would exit `/docs/`
+
+### Navigation Reference Validation
+
+**Rule**: All navigation references must map to content within `/docs/`
+
+**Purpose**: Ensure navigation links work properly within the Docusaurus structure
+
+**Error Conditions**:
+- Navigation reference maps to content outside `/docs/`
+- Navigation reference points to non-existent content within `/docs/`
+
+## Error Handling
+
+### Standard Error Response
+
+```json
+{
+  "error": {
+    "code": "INVALID_CONTENT_LOCATION",
+    "message": "Content is not located under the required /docs directory",
+    "details": {
+      "invalidPaths": [
+        "path/to/invalid/content.md"
+      ]
+    }
+  }
+}
+```
+
+### Common Error Codes
+
+- `INVALID_CONTENT_LOCATION`: Content path is not under `/docs/`
+- `NAVIGATION_REF_OUTSIDE_DOCS`: Navigation reference points outside `/docs/`
+- `CONTENT_NOT_FOUND`: Referenced content does not exist
+- `INVALID_PATH_FORMAT`: Path format is invalid or contains prohibited patterns
+
+## Validation Process
+
+The validation process should be run regularly to ensure compliance with the documentation location constraint:
+
+1. Scan all content files in the repository
+2. Verify each content file path starts with `/docs/`
+3. Validate all navigation references point to valid content within `/docs/`
+4. Report any non-compliant content locations
