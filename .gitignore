@@ -73,11 +73,3 @@ tslint.yaml
 .DS_Store
 Thumbs.db
 
-# Docusaurus
-.docusaurus/
-.cache/
-.temp/
-
-# Docusaurus build outputs (if using custom output folders)
-website/build/
-docs/build/
